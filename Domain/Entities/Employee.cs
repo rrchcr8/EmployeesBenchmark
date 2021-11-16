@@ -12,9 +12,5 @@ namespace Domain
         public string ImageUrl { get; set; }
         public int EmployeeCode { get; set; }
 
-
-
-
-
     }
 }
