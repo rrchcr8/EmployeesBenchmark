@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ServiceDomain.Abstractions
 {
-    interface IEmployeeRepository
+    public interface IEmployeeRepository
     {
         public Task<Employee> UpdateEmployeeAsync(Guid id, Employee Employee);
         public Task<Employee> DeleteEmployeeAsync(Guid id);
