@@ -7,9 +7,9 @@ using Mapster;
 using Contracts;
 using Domain;
 using Domain.Repositories;
-using ServiceDomain.Abstractions;
+using Services.Abstractions;
 
-namespace Application.Implementations
+namespace Services
 {
     class EmployeeService : IEmployeeService
     {
@@ -26,7 +26,7 @@ namespace Application.Implementations
             
         }
 
-        public async Task<Employee> GetEmployeeByIdAsync(Guid id)
+        public async Task<Employee> GetEmployeeByIdAsync(int id)
         {
             return await repositoryManager.EmployeeRepository.GetByIdAsync(id);
         }
@@ -39,7 +39,7 @@ namespace Application.Implementations
             return employee;
         }
 
-        public async Task UpdateEmployeeAsync(Guid id, EmployeeForUpdateDto employeeForUpdate)
+        public async Task UpdateEmployeeAsync(int id, EmployeeForUpdateDto employeeForUpdate)
         {
             Employee employee = await repositoryManager.EmployeeRepository.GetByIdAsync(id);
             if (employee != null) {
@@ -53,7 +53,7 @@ namespace Application.Implementations
             
         }
 
-        public async Task DeleteEmployeeAsync(Guid id)
+        public async Task DeleteEmployeeAsync(int id)
         {
             Employee employee = await repositoryManager.EmployeeRepository.GetByIdAsync(id);
 

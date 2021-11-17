@@ -1,4 +1,6 @@
 ﻿using Domain;
+using Domain.Repositories;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Implementation
 {
-    class EmployeeRepository
+    class EmployeeRepository:IEmployeeRepository
     {
         private readonly IApplicationDbContext applicationDbContext;
 
@@ -15,11 +17,23 @@ namespace Repository.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public void Create(Employee employee)
+
+        public async Task<IEnumerable<Employee>> GetEmployeesAsync()
         {
-            this.applicationDbContext.Employees.Add(employee);
+            return await applicationDbContext.Employees.ToListAsync();
         }
 
+        public async Task<Employee> GetByIdAsync(int EmployeeId) =>
+            await applicationDbContext.Employees.FirstOrDefaultAsync(x => x.Id == EmployeeId);
+
+       
+       
+
+        public void Insert(Employee Employee) => applicationDbContext.Employees.Add(Employee);
+
+        public void Remove(Employee Employee) => applicationDbContext.Employees.Remove(Employee);
+
+      
 
     }
 }

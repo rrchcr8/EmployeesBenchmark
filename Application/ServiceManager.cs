@@ -1,7 +1,7 @@
-﻿using Application.Implementations;
+﻿
 using Domain.Repositories;
 using Repository;
-using ServiceDomain.Abstractions;
+using Services.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;

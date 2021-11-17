@@ -12,6 +12,6 @@ namespace Repository
     {
         DbSet<Employee> Employees { get; set; }
 
-        Task<int> SaveChanges();
+    
     }
 }

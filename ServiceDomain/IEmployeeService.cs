@@ -4,14 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ServiceDomain.Abstractions
+namespace Services.Abstractions
 {
     public interface IEmployeeService
     {
         Task<IEnumerable<Employee>> GetAllEmployeesAsync();
-        Task<Employee> GetEmployeeByIdAsync(Guid id);
+        Task<Employee> GetEmployeeByIdAsync(int id);
         Task<Employee> CreateEmployeeAsync(EmployeeForCreationDto employeeForCreation);
-        public Task UpdateEmployeeAsync(Guid id, EmployeeForUpdateDto Employee);
-        public Task DeleteEmployeeAsync(Guid id);
+        public Task UpdateEmployeeAsync(int id, EmployeeForUpdateDto Employee);
+        public Task DeleteEmployeeAsync(int id);
     }
 }
