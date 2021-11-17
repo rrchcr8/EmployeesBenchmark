@@ -10,11 +10,8 @@ namespace ServiceDomain.Abstractions
     {
         Task<IEnumerable<Employee>> GetAllEmployeesAsync();
         Task<Employee> GetEmployeeByIdAsync(Guid id);
-        Task<Employee> CreateEmployeeAsync(EmployeeForCreationDTO employeeForCreation);
-        public Task<Employee> UpdateEmployeeAsync(Guid id, Employee Employee);
-        public Task<Employee> DeleteEmployeeAsync(Guid id);
-        
-        ;
-
+        Task<Employee> CreateEmployeeAsync(EmployeeForCreationDto employeeForCreation);
+        public Task UpdateEmployeeAsync(Guid id, EmployeeForUpdateDto Employee);
+        public Task DeleteEmployeeAsync(Guid id);
     }
 }

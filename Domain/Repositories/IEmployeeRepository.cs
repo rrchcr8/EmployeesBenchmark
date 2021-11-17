@@ -9,7 +9,7 @@ namespace Domain.Repositories
     {
         void Insert(Employee Employee);
         public Task<Employee> UpdateAsync(Guid id, Employee Employee);
-        void Remove(Guid id);
+        void Remove(Employee employee);
         public Task<Employee> GetByIdAsync(Guid id);
         public Task<IEnumerable<Employee>> GetEmployeesAsync();
     }

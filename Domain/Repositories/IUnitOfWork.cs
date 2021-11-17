@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Domain.Repositories
 {
-    public interface IRepositoryManager
+    public interface IUnitOfWork
     {
-        IEmployeeRepository EmployeeRepository { get; }
-        IUnitOfWork UnitOfWork { get; }
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

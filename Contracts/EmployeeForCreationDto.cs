@@ -2,7 +2,7 @@
 
 namespace Contracts
 {
-    public class EmployeeForCreationDTO
+    public class EmployeeForCreationDto
     {
         public string Name { get; set; }
         public string Email { get; set; }

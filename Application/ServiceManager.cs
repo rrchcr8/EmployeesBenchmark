@@ -1,4 +1,6 @@
-﻿using Repository;
+﻿using Application.Implementations;
+using Domain.Repositories;
+using Repository;
 using ServiceDomain.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -10,19 +12,15 @@ namespace Application.ServiceManager
 {
     public class ServiceManager : IServiceManager
     {
-        private readonly IApplicationDbContext applicationDbContext;
-        public ServiceManager(IApplicationDbContext applicationDbContext)
+        private readonly Lazy<IEmployeeService> lazyEmployeeService;
+        
+
+        public ServiceManager(IRepositoryManager repositoryManager)
         {
-            this.applicationDbContext = applicationDbContext;
+            this.lazyEmployeeService = new Lazy<IEmployeeService>(() => new EmployeeService(repositoryManager));
         }
 
-                
-        public IEmployeeService EmployeeService {
+        public IEmployeeService EmployeeService => this.lazyEmployeeService.Value;
 
-            get
-            {
-                return new EmployeeService(this.applicationDbContext);
-            }
-        }
     }
 }

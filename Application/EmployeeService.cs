@@ -3,44 +3,69 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Mapster;
+using Contracts;
 using Domain;
+using Domain.Repositories;
 using ServiceDomain.Abstractions;
 
 namespace Application.Implementations
 {
     class EmployeeService : IEmployeeService
     {
-        private readonly IDB;
+        private readonly IRepositoryManager repositoryManager ;
 
-        public CampaignService(IRepositoryManager repositoryManager)
+        public EmployeeService(IRepositoryManager repositoryManager)
         {
             this.repositoryManager = repositoryManager;
         }
 
-
-        public Task<Employee> CreateEmployeeAsync(Employee Employee)
+        public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
         {
-            throw new NotImplementedException();
+            return await repositoryManager.EmployeeRepository.GetEmployeesAsync();
+            
         }
 
-        public Task<Employee> DeleteEmployeeAsync(Guid id)
+        public async Task<Employee> GetEmployeeByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await repositoryManager.EmployeeRepository.GetByIdAsync(id);
         }
 
-        public Task<Employee> GetEmployeeByIdAsync(Guid id)
+        public async Task<Employee> CreateEmployeeAsync(EmployeeForCreationDto employeeForCreation)
         {
-            throw new NotImplementedException();
+            var employee = employeeForCreation.Adapt<Employee>();
+            repositoryManager.EmployeeRepository.Insert(employee);
+            await repositoryManager.UnitOfWork.SaveChangesAsync();
+            return employee;
         }
 
-        public Task<IEnumerable<Employee>> GetEmployeesAsync(Guid workspaceId)
+        public async Task UpdateEmployeeAsync(Guid id, EmployeeForUpdateDto employeeForUpdate)
         {
-            throw new NotImplementedException();
+            Employee employee = await repositoryManager.EmployeeRepository.GetByIdAsync(id);
+            if (employee != null) {
+                employee.Name = employeeForUpdate.Name;
+                employee.ImageUrl = employeeForUpdate.ImageUrl;
+                employee.JobTitle = employeeForUpdate.JobTitle;
+                employee.Phone = employeeForUpdate.Phone;
+                employee.Email = employeeForUpdate.Email;
+                await repositoryManager.UnitOfWork.SaveChangesAsync();
+            }
+            
         }
 
-        public Task<Employee> UpdateEmployeeAsync(Guid id, Employee Employee)
+        public async Task DeleteEmployeeAsync(Guid id)
         {
-            throw new NotImplementedException();
+            Employee employee = await repositoryManager.EmployeeRepository.GetByIdAsync(id);
+
+            if (!(employee is null))
+            {
+                repositoryManager.EmployeeRepository.Remove(employee);
+
+                await repositoryManager.UnitOfWork.SaveChangesAsync();
+
+
+            }
+
         }
     }
 }
