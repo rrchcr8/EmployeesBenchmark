@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Repository\Repository.csproj" />
-    <ProjectReference Include="..\ServiceDomain\DomainAbstractions.csproj" />
+    <ProjectReference Include="..\Repository\Persistance.csproj" />
+    <ProjectReference Include="..\ServiceDomain\Services.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>

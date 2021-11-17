@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.ServiceManager
+namespace Domain.Repositories
 {
-    public interface IServiceManager
+    public interface IRepositoryManager
     {
-        public CampaignService CampaignService { get; }
+        IEmployeeRepository EmployeeRepository { get; }
     }
 }

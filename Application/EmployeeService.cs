@@ -10,6 +10,14 @@ namespace Application.Implementations
 {
     class EmployeeService : IEmployeeService
     {
+        private readonly IDB;
+
+        public CampaignService(IRepositoryManager repositoryManager)
+        {
+            this.repositoryManager = repositoryManager;
+        }
+
+
         public Task<Employee> CreateEmployeeAsync(Employee Employee)
         {
             throw new NotImplementedException();

@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
+    <ProjectReference Include="..\Repository\Persistance.csproj" />
+    <ProjectReference Include="..\ServiceDomain\Services.Abstractions.csproj" />
   </ItemGroup>
 
 </Project>
