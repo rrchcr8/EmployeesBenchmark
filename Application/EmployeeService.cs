@@ -8,6 +8,7 @@ using Contracts;
 using Domain;
 using Domain.Repositories;
 using Services.Abstractions;
+using System.Threading;
 
 namespace Services
 {
@@ -34,6 +35,7 @@ namespace Services
         public async Task<Employee> CreateEmployeeAsync(EmployeeForCreationDto employeeForCreation)
         {
             var employee = employeeForCreation.Adapt<Employee>();
+            employee.EmployeeCode = Guid.NewGuid().ToString();
             repositoryManager.EmployeeRepository.Insert(employee);
             await repositoryManager.UnitOfWork.SaveChangesAsync();
             return employee;
@@ -53,19 +55,14 @@ namespace Services
             
         }
 
-        public async Task DeleteEmployeeAsync(int id)
+        public async Task DeleteEmployeeAsync(int id, CancellationToken cancellationToken = default)
         {
-            Employee employee = await repositoryManager.EmployeeRepository.GetByIdAsync(id);
-
-            if (!(employee is null))
+          var employee = await repositoryManager.EmployeeRepository.GetByIdAsync(id);
+            if (employee != null)
             {
                 repositoryManager.EmployeeRepository.Remove(employee);
-
-                await repositoryManager.UnitOfWork.SaveChangesAsync();
-
-
+                await repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
             }
-
-        }
+            }
     }
 }

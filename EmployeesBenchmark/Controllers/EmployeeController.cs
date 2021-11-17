@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 namespace EmployeesBenchmark.Controllers
 {
     
+    
+    [Route("api/v1/employee")]
     [ApiController]
-    [Route("api/[controller]")]
     public class EmployeeController : ControllerBase
     {
 
@@ -19,7 +20,8 @@ namespace EmployeesBenchmark.Controllers
 
         public EmployeeController(IServiceManager serviceManager) => _serviceManager = serviceManager;
 
-        [HttpGet]
+        [HttpGet("all/")]
+       
         public async Task<IActionResult> GetEmployees()
         {
             var owners = await _serviceManager.EmployeeService.GetAllEmployeesAsync();
@@ -27,7 +29,7 @@ namespace EmployeesBenchmark.Controllers
             return Ok(owners);
         }
 
-        [HttpGet("{employeeId:guid}")]
+        [HttpGet("{employeeId:int}")]
         public async Task<IActionResult> GetEmployeeById(int employeeId)
         {
             var employee = await _serviceManager.EmployeeService.GetEmployeeByIdAsync(employeeId);
@@ -35,15 +37,16 @@ namespace EmployeesBenchmark.Controllers
             return Ok(employee);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CreateEmployee([FromBody] EmployeeForCreationDto employeeForCreation )
+        [HttpPost("add/")]
+        public async Task<IActionResult> CreateEmployee([FromBody] EmployeeForCreationDto employeeForCreation)
         {
             var employee = await _serviceManager.EmployeeService.CreateEmployeeAsync(employeeForCreation);
 
             return CreatedAtAction(nameof(GetEmployeeById), new { employeeId = employee.Id }, employee);
+            //return Ok(employee);
         }
 
-        [HttpPut("{employeeId:guid}")]
+        [HttpPut("update/{employeeId:int}")]
         public async Task<IActionResult> UpdateEmployee(int employeeId, [FromBody] EmployeeForUpdateDto employeeForUpdate)
         {
             await _serviceManager.EmployeeService.UpdateEmployeeAsync(employeeId, employeeForUpdate);
@@ -51,7 +54,7 @@ namespace EmployeesBenchmark.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{employeeId:guid}")]
+        [HttpDelete("delete/{employeeId:int}")]
         public async Task<IActionResult> DeleteEmployee(int employeeId)
         {
             await _serviceManager.EmployeeService.DeleteEmployeeAsync(employeeId);

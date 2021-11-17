@@ -2,26 +2,20 @@ using Application.ServiceManager;
 using Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Persistance;
 using Persistance.Implementation;
-using Repository;
 using Services.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EmployeesBenchmark
 {
     public class Startup
     {
+        readonly string CorsConfiguration = "_corsConfiguration";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,6 +28,7 @@ namespace EmployeesBenchmark
         {
 
             services.AddControllers();
+            ;
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeesBenchmark", Version = "v1" });
@@ -43,12 +38,26 @@ namespace EmployeesBenchmark
             services.AddScoped<IRepositoryManager, RepositoryManager>();
 
             //db
+            string connectionString = this.Configuration.GetConnectionString("myconn");
+            services.AddDbContext<ApplicationDbContext>(item => item.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-               options.UseSqlServer(
-                   Configuration.GetConnectionString("DefaultConnection"), 
-                   b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //   options.UseSqlServer(
+            //       Configuration.GetConnectionString("DefaultConnection"), 
+            //       b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            //services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: CorsConfiguration,
+                                  builder =>
+                                  {
+                                      builder
+                                      .WithOrigins("http://localhost:4200")
+                                      .AllowAnyHeader()
+                                      .AllowAnyMethod();
+                                  });
+            });
 
 
         }
@@ -66,6 +75,8 @@ namespace EmployeesBenchmark
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseCors(CorsConfiguration);
+
 
             app.UseEndpoints(endpoints =>
             {

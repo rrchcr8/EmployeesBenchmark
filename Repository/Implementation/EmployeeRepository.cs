@@ -12,9 +12,9 @@ namespace Repository.Implementation
 {
     class EmployeeRepository:IEmployeeRepository
     {
-        private readonly IApplicationDbContext applicationDbContext;
+        private readonly ApplicationDbContext applicationDbContext;
 
-        public EmployeeRepository(IApplicationDbContext applicationDbContext) {
+        public EmployeeRepository(ApplicationDbContext applicationDbContext) {
             this.applicationDbContext = applicationDbContext;
         }
 
@@ -27,14 +27,12 @@ namespace Repository.Implementation
         public async Task<Employee> GetByIdAsync(int EmployeeId) =>
             await applicationDbContext.Employees.FirstOrDefaultAsync(x => x.Id == EmployeeId);
 
-       
-       
-
         public void Insert(Employee Employee) => applicationDbContext.Employees.Add(Employee);
 
-        public void Remove(Employee Employee) => applicationDbContext.Employees.Remove(Employee);
+        public void Remove(Employee employee) { 
+            applicationDbContext.Employees.Remove(employee);
+        }
 
-      
 
     }
 }

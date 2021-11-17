@@ -2,6 +2,7 @@
 using Domain;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Services.Abstractions
@@ -12,6 +13,6 @@ namespace Services.Abstractions
         Task<Employee> GetEmployeeByIdAsync(int id);
         Task<Employee> CreateEmployeeAsync(EmployeeForCreationDto employeeForCreation);
         public Task UpdateEmployeeAsync(int id, EmployeeForUpdateDto Employee);
-        public Task DeleteEmployeeAsync(int id);
+        public Task DeleteEmployeeAsync(int id, CancellationToken cancellationToken = default);
     }
 }

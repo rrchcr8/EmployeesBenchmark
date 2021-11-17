@@ -10,7 +10,7 @@ namespace Domain
         public string JobTitle { get; set; }
         public string Phone { get; set; }
         public string ImageUrl { get; set; }
-        public int EmployeeCode { get; set; }
+        public string EmployeeCode { get; set; }
 
     }
 }
