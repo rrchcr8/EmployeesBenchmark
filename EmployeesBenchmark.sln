@@ -3,21 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeesBenchmark", "EmployeesBenchmark\EmployeesBenchmark.csproj", "{6DBA81EF-295D-40D5-BE3F-6F5648174CE0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeesBenchmark", "EmployeesBenchmark\EmployeesBenchmark.csproj", "{6DBA81EF-295D-40D5-BE3F-6F5648174CE0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{9CC7455A-4ECB-470B-9CE9-85732F51B7E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{6F959087-CF0B-42B1-89A1-A787A21A5DBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{6F959087-CF0B-42B1-89A1-A787A21A5DBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services.Abstractions", "ServiceDomain\Services.Abstractions.csproj", "{6CF464C8-EECF-4CBA-8B1E-CADDEEE2EE41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services.Abstractions", "ServiceDomain\Services.Abstractions.csproj", "{6CF464C8-EECF-4CBA-8B1E-CADDEEE2EE41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistance", "Repository\Persistance.csproj", "{EE492922-897D-4579-B0D9-ED6AC029EA3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistance", "Repository\Persistance.csproj", "{EE492922-897D-4579-B0D9-ED6AC029EA3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Application\Services.csproj", "{B10664FF-E8F9-4432-BEAF-308B29A5F1A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Application\Services.csproj", "{B10664FF-E8F9-4432-BEAF-308B29A5F1A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{B8483807-57DA-47F2-A89C-4F0E83EF3B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Contracts\Contracts.csproj", "{C6FE4C18-2730-4F7F-A265-E320C60C1791}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{C6FE4C18-2730-4F7F-A265-E320C60C1791}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E3F7EE87-5526-4CD0-9D8E-9C8F4FC00FD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Tests", "Service.Tests\Service.Tests.csproj", "{55A8DD5F-9A2E-4AB2-8F65-300463826C0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{C6FE4C18-2730-4F7F-A265-E320C60C1791}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6FE4C18-2730-4F7F-A265-E320C60C1791}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6FE4C18-2730-4F7F-A265-E320C60C1791}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55A8DD5F-9A2E-4AB2-8F65-300463826C0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55A8DD5F-9A2E-4AB2-8F65-300463826C0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55A8DD5F-9A2E-4AB2-8F65-300463826C0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55A8DD5F-9A2E-4AB2-8F65-300463826C0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +68,7 @@ Global
 		{EE492922-897D-4579-B0D9-ED6AC029EA3A} = {B8483807-57DA-47F2-A89C-4F0E83EF3B53}
 		{B10664FF-E8F9-4432-BEAF-308B29A5F1A0} = {9CC7455A-4ECB-470B-9CE9-85732F51B7E0}
 		{C6FE4C18-2730-4F7F-A265-E320C60C1791} = {9CC7455A-4ECB-470B-9CE9-85732F51B7E0}
+		{55A8DD5F-9A2E-4AB2-8F65-300463826C0C} = {E3F7EE87-5526-4CD0-9D8E-9C8F4FC00FD9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7981D091-E836-4570-808D-BC482A19798D}

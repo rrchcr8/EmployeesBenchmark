@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace Services
 {
-    class EmployeeService : IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private readonly IRepositoryManager repositoryManager ;
 
