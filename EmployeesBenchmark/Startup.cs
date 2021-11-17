@@ -1,3 +1,5 @@
+using Application.ServiceManager;
+using Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -7,7 +9,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Persistance;
+using Persistance.Implementation;
 using Repository;
+using Services.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,8 +39,11 @@ namespace EmployeesBenchmark
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeesBenchmark", Version = "v1" });
             });
 
+            services.AddScoped<IServiceManager, ServiceManager>();
+            services.AddScoped<IRepositoryManager, RepositoryManager>();
+
             //db
-            
+
             services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(
                    Configuration.GetConnectionString("DefaultConnection"), 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading.Tasks;
 
-namespace Repository
+namespace Persistance
 {
     public class ApplicationDbContext:DbContext, IApplicationDbContext
     {
